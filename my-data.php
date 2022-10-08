@@ -26,3 +26,10 @@ add_action( 'init', function() {
 		);
 	} );
 } );
+
+
+add_filter( 'the_content', 'show_meta_data_content' );
+function show_meta_data_content( $content ) {
+	$some_meta = ( get_post_meta( get_the_ID(), '_my_data', true ) ?: 'meta unset' );
+	return '<pre>' . $some_meta . '<br>' . __FUNCTION__ . '</pre>' . $content;
+}
